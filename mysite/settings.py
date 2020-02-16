@@ -26,17 +26,30 @@ SECRET_KEY = '^_^-*pyk48ij1kza!3fy7wss+q^n(*2e3__-g_(*d3qs-+o8!$'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+
+
 # mysite/settings.py
 # Channels
 ASGI_APPLICATION = 'mysite.routing.application'
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 # Application definition
 
 INSTALLED_APPS = [
